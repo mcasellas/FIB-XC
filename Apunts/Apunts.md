@@ -51,6 +51,7 @@ DL-H | IP-H | T-H | **Transport Data** | **Transport Data** | DL-T
 DL-H | IP-H | **IP Data** | **IP Data** | **IP Data** | DL-T
 DL-H | **Frame Data** | **Frame Data** | **Frame Data** | **Frame Data** | DL-T
 
+---
 # T1. Internet Protocol
 
 ## Direcció IP:
@@ -67,9 +68,11 @@ Adreces de `32 bits` -> Màscara de `24 bits`, alhesores: `8` últims de host. V
 > Tot 1's. -> 255.255.255.0
 
 []()
-> 0..0 `Xarxa`
+> 0.0.0.0 `Xarxa`
 >
->1..1  `Broadcast`
+> 1.1.1.1  `Broadcast`
+>
+> 127.0.0.1 `Localhost`
 >
 > Com a mínim he de reservar una pel router.
 
@@ -87,7 +90,7 @@ Vull 50 hosts
 2^5 = 32 // NO
 ```
 
-## Direccionament
+## Direccionament:
 #### Públic:
 
 #### Privat:
@@ -95,9 +98,9 @@ Vull 50 hosts
 
 Classe | Inici | Network bits | Host bits
 :-:|:-:|:-:|:-:
-A | 10.0.0.0 - 10.255.255.255 | 8 `[0 .. <-7->]` | 24
-B | 172.16.0.0 - 172.31.255.255 | 16 `[10 .. <-14->]` | 16
-C | 192.168.1.1 - 192.168.255.255 | 24 `[110 .. <-21->]` | 8
+A | 10.**0.0.0 - 10.255.255.255** | 8 `[0 .. <-7->]` | 24
+B | 172.**16.0.0** - 172.**31.255.255** | 16 `[10 .. <-14->]` | 16
+C | 192.168.**1.1** - 192.168.**255.255** | 24 `[110 .. <-21->]` | 8
 
 ##### A:
 0 | X | X | X | X | X | X | X
@@ -113,8 +116,54 @@ C | 192.168.1.1 - 192.168.255.255 | 24 `[110 .. <-21->]` | 8
 1 | 1 | 0 | X | X | X | X | X
 -|-|-|-|-|-|-|-
 
+
+#### *Exemple exàmen:*
 ```
 220.10.0.0/25
 
-2^(32-25) -2 -Routers
+2^(32-25) -> 7 bits.
+2^7 = 128, tinc 94 màquines // OK
+128 -2 -Routers
 ```
+***Distribució d’adreces públiques més adient:***
+
+Xarxa | Nº direccions | Nº bits host
+:-:|:-:|:-:
+N4 | 50 + 1(R) + 2(X+B) = 53 | 64 -> `6 bits`
+N1 | 20 + 1 + 2 = 23 | 32 -> `5 bits`
+N2 | 12 + 1 + 2 = 15 | 16 -> `4 bits`
+N3 | 10 + 1 + 2 = 13 | 16 -> `4 bits`
+
+***Adreces IP decidides per a cada xarxa:***
+
+Xarxa | Màscara | Adreça IP | Bit a bit
+:-:|:-:|:-:|:-:
+Adreça contractada | /25 | **220.10.0.0/25**
+N4 | /26 | **220.10.0.0/26** (subconjunt de l'anterior) | 00XXXXXX
+N1 | /27 | **220.10.0.64/27** (subconjunt de l'anterior) | 01XXXXXX
+N2 | /28 | **220.10.0.96/28** (subconjunt de l'anterior) | 010XXXXX
+N3 | /28 | **220.10.0.112/28** (subconjunt de l'anterior) | 011XXXXX
+
+***Volem unir les xarxes N3 i N2:***
+
+15+13 = 28 -> `5 bits`
+
+> Retrocedim un bit.
+
+Xarxa | IP | Màscara
+-|-|-
+N2+N3|  220.10.0.96 | /27
+
+## Enrutament:
+
+#### *Exercici:*
+
+`Exercici 1`
+
+*Xarxa destí* | *Màscara* | Gateway | Interfície
+:-:|:-:|:-:|:-:
+200.200.0 | /27 | 200.200.200.65 (RI) | e0
+200.200.32 | /27 | 200.200.200.66 (R1) | e0
+200.200.64 | /27 | Directe | e0
+200.200.0 | ... |  |
+Resta 0.0.0.0 | 0.0.0.0 | 200.200.200.66 (R1) | e0
