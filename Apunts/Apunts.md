@@ -167,3 +167,43 @@ N2+N3|  220.10.0.96 | /27
 200.200.200.64 | /27 | Directe | e0
 200.200.200.0 | ... |  |
 Resta 0.0.0.0 | 0.0.0.0 | 200.200.200.66 (R1) | e0
+
+## Fregmentació:
+
+Enviament de paquets amb una mida màxima.
+
+`MTU` Maximum Transfer Unit -> Data
+
+Datagrama IP amb **MTU de 1020**
+- Dades Transport (1000 Bytes)
+- Cabeçera IP (20 Bytes)
+
+*Així puc dividir en blocs de 1000.*
+
+> Si IP fragmenta i algun paquet es perd no el recupera. **Els hauriem de fer a l'aplicació** perquè Transport->IP no fragmenti.
+
+***Opcions:***
+- Que reconstueixi la màquina final
+- Que els routers intermitjos reconsturixin i tornin a fragmentar.
+
+***Necessito per reconstruïr la fragmentació:***
+- Identificacor
+- Offset
+- Mida
+
+Necessito un ordre i saber de quin orígen pertanyen. Però... ***i si les MTU són diferents?***
+
+`MTU 1020 -> MTU 420` Per encabir: [20+400]+[20+400]+[20+200]
+
+`MTU 420 -> MTU 220` Per encabir: [20+200]+[20+200]
+
+***Per identificar-los amb les fragmentacions?***
+
+*Offset del byte.*
+
+1000Bytes -> byte a byte -> `[0...999]` -> `[0..399][400..799][800..999]`
+
+> `DF:` Don't Fragment
+>
+> `MF:` More Fragment
+> - A l'últim MF = 1 (ja està) o MF = 0 (encara en falten)
