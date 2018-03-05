@@ -180,7 +180,9 @@ Datagrama IP amb **MTU de 1020**
 
 *Així puc dividir en blocs de 1000.*
 
-> Si IP fragmenta i algun paquet es perd no el recupera. **Els hauriem de fer a l'aplicació** perquè Transport->IP no fragmenti.
+> Si IP fragmenta i algun paquet es perd no el recupera.
+>
+> **Els hauriem de fer a l'aplicació** perquè Transport->IP no fragmenti.
 
 ***Opcions:***
 - Que reconstueixi la màquina final
@@ -199,11 +201,38 @@ Necessito un ordre i saber de quin orígen pertanyen. Però... ***i si les MTU s
 
 ***Per identificar-los amb les fragmentacions?***
 
-*Offset del byte.*
+*Offset del byte:* Identifica els octets.
 
 1000Bytes -> byte a byte -> `[0...999]` -> `[0..399][400..799][800..999]`
 
-> `DF:` Don't Fragment
->
-> `MF:` More Fragment
-> - A l'últim MF = 1 (ja està) o MF = 0 (encara en falten)
+> **DF:** Don't Fragment
+
+> **MF:** More Fragments
+
+> > `MF = 0:` Ja no queden fragments per enviar.
+
+> > `MF = 1:` Encara falten per enviar.
+
+***Quants bits per l'offset?***
+
+1000 bytes -> 2^10 -> 10 bits
+
+> **Exemple 1:**
+
+> Establim una mida mínima. Ex: Si la capçalera és de 20 bytes, no faré fragmentacions de 1 byte.
+```
+Blocs de `8 bytes` 2^3 = 8 -> M'estalvio 3 bits.
+
+> 10+3 = 13 bits
+```
+
+
+[]()
+> **Exemple 2:**
+
+> MTU = 520 -> 500 de Dades.
+
+> *Arrodonim al múltiple de 8 menor.*
+```
+Dades de 496 -> Ha de ser múltiple de 8
+```
