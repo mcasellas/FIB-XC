@@ -252,7 +252,7 @@ Versió (4 bits) | IHL (Header Length) (4 bits) | Tipus de servei (8 bits) | Mid
 -|-|-|-
 
 Identificació (16 bits) | Reservat (1 bit) | DF (1 bit) | MF (1 bit) | Fragment Offset
--|-|-|-
+-|-|-|-|-
 
 Time To Live (8 bits) | Protocol (8 bits) | Header Checksum (16 bits)
 -|-|-
