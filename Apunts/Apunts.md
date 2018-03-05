@@ -220,10 +220,11 @@ Necessito un ordre i saber de quin orígen pertanyen. Però... ***i si les MTU s
 > **Exemple 1:**
 
 > Establim una mida mínima. Ex: Si la capçalera és de 20 bytes, no faré fragmentacions de 1 byte.
+
 ```
 Blocs de `8 bytes` 2^3 = 8 -> M'estalvio 3 bits.
 
-> 10+3 = 13 bits
+10+3 = 13 bits
 ```
 
 
@@ -233,6 +234,7 @@ Blocs de `8 bytes` 2^3 = 8 -> M'estalvio 3 bits.
 > MTU = 520 -> 500 de Dades.
 
 > *Arrodonim al múltiple de 8 menor.*
+
 ```
 Dades de 496 -> Ha de ser múltiple de 8
 ```
