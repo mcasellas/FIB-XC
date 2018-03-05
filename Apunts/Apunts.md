@@ -244,21 +244,22 @@ Dades de 496 -> Ha de ser múltiple de 8
 ```
 
 
-### Cabeçera:
+### Capçalera:
 
 **20 octets obligatoris** -> 32 octets (4 octets) * 5 = 20 octets.
 
-Versió (4 bits) | IHL (Header Length) (4 bits) | Tipus de servei (8 bits) | Mida total (16 bits) | Identificació (16 bits) | DF(1 bit) MF(1 bit) Fragment Offset | Time To Live (8 bits) | Protocol (8 bits) | Header Checksum (16 bits) | Source Address (32 bits) | Destination Address (32 bits) | Options | Padding
--|-|-|-|-|-|-|-|-|-|-
+Versió (4 bits) | IHL (Header Length) (4 bits) | Tipus de servei (8 bits) | Mida total (16 bits) | Identificació (16 bits) | Reservat (1 bit); DF (1 bit); MF (1 bit); Fragment Offset | Time To Live (8 bits) | Protocol (8 bits) | Header Checksum (16 bits) | Source Address (32 bits) | Destination Address (32 bits) | Options | Padding
+-|-|-|-|-|-|-|-|-|-|-|-|-
 
 ```
 - Versió (4 bits)
-- IHL (4 bits) // Header length
+- IHL (4 bits) // Internet Header length
 - Tipus de servei (8 bits)
 - Mida total (16 bits)
 
 
 - Identificació (16 bits)
+- Reservat (1 bit)
 - DF(1 bit)
 - MF(1 bit)
 - Fragment Offset (14 bits)
