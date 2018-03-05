@@ -207,11 +207,17 @@ Necessito un ordre i saber de quin orígen pertanyen. Però... ***i si les MTU s
 
 > **DF:** Don't Fragment
 >
+> > Si es troba una xarxa amb una MTU més petita -> No puc passar, no em deixa fragmentar
+>
+> > **MTU Path Discovery:** Protocol de missatges de control
+>
 > **MF:** More Fragments
 >
 > > `MF = 0:` Ja no queden fragments per enviar.
 > >
 > > `MF = 1:` Encara falten per enviar.
+
+
 
 ***Quants bits per l'offset?***
 
@@ -220,14 +226,13 @@ Necessito un ordre i saber de quin orígen pertanyen. Però... ***i si les MTU s
 > **Exemple 1:**
 >
 > Establim una mida mínima. Ex: Si la capçalera és de 20 bytes, no faré fragmentacions de 1 byte.
+
 ```
 Blocs de `8 bytes` 2^3 = 8 -> M'estalvio 3 bits.
 
 10+3 = 13 bits
 ```
 
-
-[]()
 > **Exemple 2:**
 >
 > MTU = 520 -> 500 de Dades.
@@ -237,3 +242,46 @@ Blocs de `8 bytes` 2^3 = 8 -> M'estalvio 3 bits.
 ```
 Dades de 496 -> Ha de ser múltiple de 8
 ```
+
+
+### Cabeçera:
+
+**20 octets obligatoris** -> 32 octets (4 octets) * 5 = 20 octets.
+
+Versió (4 bits) | IHL (Header Length) (4 bits) | Tipus de servei (8 bits) | Mida total (16 bits) | Identificació (16 bits) | DF(1 bit) MF(1 bit) Fragment Offset | Time To Live (8 bits) | Protocol (8 bits) | Header Checksum (16 bits) | Source Address (32 bits) | Destination Address (32 bits) | Options | Padding
+-|-|-|-|-|-|-|-|-|-|-
+
+```
+- Versió (4 bits)
+- IHL (4 bits) // Header length
+- Tipus de servei (8 bits)
+- Mida total (16 bits)
+
+
+- Identificació (16 bits)
+- DF(1 bit)
+- MF(1 bit)
+- Fragment Offset (14 bits)
+- Time To Live (8 bits)
+- Protocol (8 bits)
+- Header Checksum(16 bits) // Comprovació -> Suma de bits
+
+
+- Source Address (32 bits)
+- Destination Adress (32 bits)
+- Options (16 bits)
+- Padding (16 bits)
+```
+
+> **Time To Live:** Si queda rondant, necessito establir un temps de vida perquè si l'he de reenviar no hi hagin dos paquets amb el mateix número.
+
+[]()
+
+> **Header Checksum:** Comprovo que la suma de bits és la que he rebut.
+
+[]()
+
+> **Tipus de servei:** (8 bits)
+>
+> Prioritat|Prioritat|Prioritat|Delay|Rendiment|Fiabilitat|Cost|X (no s'utilitza)
+> -|-|-|-|-|-|-|-
