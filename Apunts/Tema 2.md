@@ -43,8 +43,8 @@ Viatge sobre IP.
 
 
 ## NAT:
-**Network Address Translation **
+**Network Address Translation**
 
 
 ## DNS:
-**Domain Name System **
+**Domain Name System**
