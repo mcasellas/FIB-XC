@@ -248,8 +248,24 @@ Dades de 496 -> Ha de ser múltiple de 8
 
 **20 octets obligatoris** -> 32 octets (4 octets) * 5 = 20 octets.
 
-Versió (4 bits) | IHL (Header Length) (4 bits) | Tipus de servei (8 bits) | Mida total (16 bits) | Identificació (16 bits) | Reservat (1 bit); DF (1 bit); MF (1 bit); Fragment Offset | Time To Live (8 bits) | Protocol (8 bits) | Header Checksum (16 bits) | Source Address (32 bits) | Destination Address (32 bits) | Options | Padding
--|-|-|-|-|-|-|-|-|-|-|-|-
+Versió (4 bits) | IHL (Header Length) (4 bits) | Tipus de servei (8 bits) | Mida total (16 bits)
+-|-|-|-
+
+Identificació (16 bits) | Reservat (1 bit) | DF (1 bit) | MF (1 bit) | Fragment Offset
+-|-|-|-
+
+Time To Live (8 bits) | Protocol (8 bits) | Header Checksum (16 bits)
+-|-|-
+
+Source Address (32 bits) |
+-|
+
+Destination Address (32 bits) |
+-|
+
+Options | Padding
+-|-|
+
 
 ```
 - Versió (4 bits)
@@ -257,16 +273,15 @@ Versió (4 bits) | IHL (Header Length) (4 bits) | Tipus de servei (8 bits) | Mid
 - Tipus de servei (8 bits)
 - Mida total (16 bits)
 
-
 - Identificació (16 bits)
 - Reservat (1 bit)
 - DF(1 bit)
 - MF(1 bit)
 - Fragment Offset (14 bits)
+
 - Time To Live (8 bits)
 - Protocol (8 bits)
 - Header Checksum(16 bits) // Comprovació -> Suma de bits
-
 
 - Source Address (32 bits)
 - Destination Adress (32 bits)
