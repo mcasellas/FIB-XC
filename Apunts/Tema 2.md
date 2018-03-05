@@ -39,7 +39,7 @@ Viatge sobre IP.
     - Temps excedit (Temps de vida s'ha acabat -> Informo l'emissor)
 
 ## DHCP:
-**Dynamic Host Configuration Protocol **
+**Dynamic Host Configuration Protocol**
 
 
 ## NAT:
