@@ -45,7 +45,7 @@ Pot tenir dues targetes de xarxa.
 ## Protocol data units:
 
 
-Protocols|||||
+-|-|-|-|-|-
 -|-|-|-|-|-
 DL-H | IP-H | T-H | A-H | **Application data** | DL-T
 DL-H | IP-H | T-H | **Transport Data** | **Transport Data** | DL-T
