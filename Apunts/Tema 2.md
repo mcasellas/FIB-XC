@@ -41,9 +41,27 @@ Viatge sobre IP.
 ## DHCP:
 **Dynamic Host Configuration Protocol**
 
+*Funciona sobre UDP*
+
+- Direcció IP
+- Mascara
+- Nom (domini)
+- Gateway
+- Mascara
+
+>mycomputer.ac.upc.edu
+
+```
+-(0.0.0.0)-> DHCP Discover
+<-255.255.255.255- DHCP Offer
+-> DHCP Request
+<-(Dir IP Servei DHCP)- DHCP Pack
+```
 
 ## NAT:
 **Network Address Translation**
+
+> *IP Privada -> Internet*
 
 
 ## DNS:
