@@ -3,7 +3,7 @@
 ## ARP:
 **Address Resolution Protocol**
 
-Viatja sota IP -> Trama.
+Viatja sota IP -> Trama de subxarxa.
 
 *Quina és la direcció d'enllaç de la IP xyz?*
 
@@ -61,8 +61,57 @@ Viatge sobre IP.
 ## NAT:
 **Network Address Translation**
 
-> *IP Privada -> Internet*
+*IP Privada -> Internet*
 
+> Servei al router.
+>
+> Taula de NAT: @Privada i @Públiques (mapejades)
+
+@Privada | @Pública
+-|-
+
+
+Estàtiques i dinàmiques
+
+`NAPT o PAT` -> NAT per ports**
+
+`DNAT` -> Comunicació comença per fora
+
+@Privada | Local port | @Pública | External Port
+-|-|-|-
 
 ## DNS:
 **Domain Name System**
+
+*Identificar les màquines per noms* i obtenir l'adreça IP.
+
+Existeix una jerarquia: `myhost.ac.upc.edu`
+
+`.edu` **Top Level Domain**
+
+- `.edu` Gestiona els següents: `upc`
+  - `upc` Gestiona els següents: `ac`
+    - `ac` Gestiona els següents.
+      - `myhost`
+
+> Existeix servidor de noms local de `ac.upc.edu`.
+
+*Necessito la IP del servidor de noms* -> **La pregunto a upc.edu** -> **La pregunto a .edu**
+
+
+*Protocol:*
+```
+Pregunto al meu DNS.
+
+
+DNS -> Pregunta a /
+/ -> Respon la IP de .org
+DNS -> Pregunta a .org
+.org -> Respon la IP de foo.org
+DNS -> Pregunta a foo.org
+foo.org -> Retorna la IP que vull
+
+El meu DNS em retorna la IP.
+```
+
+> Pot estar a la xarxa local o externament.
